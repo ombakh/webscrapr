@@ -1,0 +1,17 @@
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/bin/Debug/net8.0/webscrapr
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/bin/Debug/net8.0/webscrapr.deps.json
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/bin/Debug/net8.0/webscrapr.runtimeconfig.json
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/bin/Debug/net8.0/webscrapr.dll
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/bin/Debug/net8.0/webscrapr.pdb
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/bin/Debug/net8.0/HtmlAgilityPack.dll
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.csproj.AssemblyReference.cache
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.AssemblyInfoInputs.cache
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.AssemblyInfo.cs
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.csproj.CoreCompileInputs.cache
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.csproj.Up2Date
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.dll
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/refint/webscrapr.dll
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.pdb
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.genruntimeconfig.cache
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/ref/webscrapr.dll
