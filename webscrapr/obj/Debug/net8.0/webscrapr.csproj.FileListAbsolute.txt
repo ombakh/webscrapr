@@ -15,3 +15,4 @@
 /Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.pdb
 /Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.genruntimeconfig.cache
 /Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/ref/webscrapr.dll
+/Users/ombakhshi/RiderProjects/webscrapr/webscrapr/obj/Debug/net8.0/webscrapr.sourcelink.json
