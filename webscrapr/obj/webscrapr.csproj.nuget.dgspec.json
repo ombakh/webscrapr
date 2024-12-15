@@ -46,6 +46,10 @@
             "HtmlAgilityPack": {
               "target": "Package",
               "version": "[1.11.71, )"
+            },
+            "Microsoft.Playwright": {
+              "target": "Package",
+              "version": "[1.50.0-beta-2, )"
             }
           },
           "imports": [
