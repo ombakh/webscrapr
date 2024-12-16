@@ -1,4 +1,7 @@
-﻿using Microsoft.Playwright;
+﻿namespace webscrapr.Scraper;
+using System;
+using System.Threading.Tasks;
+using Microsoft.Playwright;
 
 class Program
 {
@@ -6,40 +9,83 @@ class Program
     {
         Console.Write("Paste your Amazon link: ");
         var url = Console.ReadLine();
-        // Start Playwright
-        using var playwright = await Playwright.CreateAsync();
-        var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
-        var page = await browser.NewPageAsync();
 
-        // Navigate to the URL
-        await page.GotoAsync(url);
-
-        // Locate the dollar and cents parts of the price
-        var dollarLocator = page.Locator(".a-price-whole");
-        var centsLocator = page.Locator(".a-price-fraction");
-
-        string dollars = string.Empty;
-        string cents = string.Empty;
-
-        if (await dollarLocator.CountAsync() > 0)
+        if (!IsValidUrl(url))
         {
-            dollars = await dollarLocator.First.InnerTextAsync();
+            Console.WriteLine("Invalid URL. Please provide a valid Amazon link.");
+            return;
         }
 
-        if (await centsLocator.CountAsync() > 0)
+        // Use UrlParser to extract title and create CSV file
+        var urlParser = new UrlParser();
+        string title = urlParser.ExtractTitleFromUrl(url);
+
+        if (title == "Invalid URL" || title == "Unknown Title")
         {
-            cents = await centsLocator.First.InnerTextAsync();
+            Console.WriteLine("Unable to extract title from the URL.");
+            return;
         }
 
-        if (!string.IsNullOrEmpty(dollars))
+        urlParser.CreateCsvFile(title);
+
+        // Fetch price
+        string price = await GetPriceFromAmazonAsync(url);
+
+        if (!string.IsNullOrEmpty(price))
         {
-            Console.WriteLine($"Price: ${dollars}{cents}");
+            Console.WriteLine($"Price: ${price}");
         }
         else
         {
             Console.WriteLine("Price not found.");
         }
+    }
 
-        await browser.CloseAsync();
+    private static bool IsValidUrl(string url)
+    {
+        return Uri.TryCreate(url, UriKind.Absolute, out Uri? result) &&
+               (result.Scheme == Uri.UriSchemeHttp || result.Scheme == Uri.UriSchemeHttps);
+    }
+
+    private static async Task<string> GetPriceFromAmazonAsync(string url)
+    {
+        try
+        {
+            using var playwright = await Playwright.CreateAsync();
+            var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
+            var page = await browser.NewPageAsync();
+
+            await page.GotoAsync(url);
+
+            var dollarLocator = page.Locator(".a-price-whole");
+            var centsLocator = page.Locator(".a-price-fraction");
+
+            string dollars = await GetTextFromLocatorAsync(dollarLocator);
+            string cents = await GetTextFromLocatorAsync(centsLocator);
+
+            await browser.CloseAsync();
+
+            if (!string.IsNullOrEmpty(dollars) && !string.IsNullOrEmpty(cents))
+            {
+                return $"{dollars}{cents}";
+            }
+
+            return string.Empty;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error occurred: {ex.Message}");
+            return string.Empty;
+        }
+    }
+
+    private static async Task<string> GetTextFromLocatorAsync(ILocator locator)
+    {
+        if (await locator.CountAsync() > 0)
+        {
+            string text = await locator.First.InnerTextAsync();
+            return text.Trim().Replace("\n", "").Replace("\r", "");
+        }
+        return string.Empty;
     }
 }
