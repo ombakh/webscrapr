@@ -60,10 +60,12 @@ class Program
 
             var dollarLocator = page.Locator(".a-price-whole");
             var centsLocator = page.Locator(".a-price-fraction");
+            var titleLocator = page.Locator("#productTitle");
 
             string dollars = await GetTextFromLocatorAsync(dollarLocator);
             string cents = await GetTextFromLocatorAsync(centsLocator);
-
+            string title = await GetTextFromLocatorAsync(titleLocator);
+            Console.WriteLine($"title: {title}");
             await browser.CloseAsync();
 
             if (!string.IsNullOrEmpty(dollars) && !string.IsNullOrEmpty(cents))
