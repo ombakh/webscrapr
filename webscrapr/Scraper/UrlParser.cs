@@ -32,10 +32,20 @@ public class UrlParser
 
     public void CreateCsvFile(string title)
     {
+        string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        string targetDirectory = Path.Combine(homeDirectory, "webscrapr/Scraper/csv");
+
         try
         {
+            // Ensure the directory exists
+            if (!Directory.Exists(targetDirectory))
+            {
+                Directory.CreateDirectory(targetDirectory);
+            }
+
+            // Combine the directory and file name
             string fileName = $"{title.Replace(" ", "_")}.csv";
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            string filePath = Path.Combine(targetDirectory, fileName);
 
             // Write a header row to the CSV file
             using var writer = new StreamWriter(filePath);

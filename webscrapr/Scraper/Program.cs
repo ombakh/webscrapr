@@ -9,16 +9,16 @@ class Program
     {
         Console.Write("Paste your Amazon link: ");
         var url = Console.ReadLine();
-
+        
         if (!IsValidUrl(url))
         {
             Console.WriteLine("Invalid URL. Please provide a valid Amazon link.");
             return;
         }
 
-        // Use UrlParser to extract title and create CSV file
         var urlParser = new UrlParser();
         string title = urlParser.ExtractTitleFromUrl(url);
+        string directory;
 
         if (title == "Invalid URL" || title == "Unknown Title")
         {
@@ -28,7 +28,6 @@ class Program
 
         urlParser.CreateCsvFile(title);
 
-        // Fetch price
         string price = await GetPriceFromAmazonAsync(url);
 
         if (!string.IsNullOrEmpty(price))
