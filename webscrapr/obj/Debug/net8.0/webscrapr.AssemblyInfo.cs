@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("webscrapr")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a2e468a0bb76ad39c2043d8fefb0b4dc5c83b22")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8d9893bea3ab76b6509b5bb7983763fd8d151b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("webscrapr")]
 [assembly: System.Reflection.AssemblyTitleAttribute("webscrapr")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
