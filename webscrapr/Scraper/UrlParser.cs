@@ -30,9 +30,6 @@ public class UrlParser
 
     public void CreateCsvFile(string title)
     {
-        string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        string targetDirectory = Path.Combine(homeDirectory, "webscrapr", "Scraper", "csv");
-
         try
         {
             if (string.IsNullOrWhiteSpace(title) || title == "Unknown Title" || title == "Invalid URL")
@@ -41,18 +38,27 @@ public class UrlParser
                 return;
             }
 
-            // sanitize title for file name
+            string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string targetDirectory = Path.Combine(homeDirectory, "RiderProjects", "webscrapr", "webscrapr", "Scraper", "csv"); // will make universal later, for my rier project right now
+            Console.WriteLine($"Target directory: {targetDirectory}");
+
             string sanitizedTitle = string.Concat(title.Split(Path.GetInvalidFileNameChars()));
+            if (string.IsNullOrWhiteSpace(sanitizedTitle))
+            {
+                Console.WriteLine("Sanitized title is empty or invalid.");
+                return;
+            }
+
             string fileName = $"{sanitizedTitle.Replace(" ", "_")}.csv";
             string filePath = Path.Combine(targetDirectory, fileName);
+            Console.WriteLine($"File path: {filePath}");
 
-            // ensure directory exists
             if (!Directory.Exists(targetDirectory))
             {
                 Directory.CreateDirectory(targetDirectory);
+                Console.WriteLine("Target directory created.");
             }
 
-            // write header
             using var writer = new StreamWriter(filePath);
             writer.WriteLine("Date,Time,Price");
 
@@ -60,7 +66,7 @@ public class UrlParser
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error creating CSV file: {ex.Message}");
+            Console.WriteLine($"Error creating CSV file: {ex}");
         }
     }
 }
