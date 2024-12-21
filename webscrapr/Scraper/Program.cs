@@ -41,7 +41,6 @@ class Program
             Console.WriteLine("Price not found.");
         }
     }
-
     private static bool IsValidUrl(string url)
     {
         return Uri.TryCreate(url, UriKind.Absolute, out Uri? result) &&

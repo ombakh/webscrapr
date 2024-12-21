@@ -9,16 +9,14 @@ public class UrlParser
     {
         try
         {
-            // Extract the part after "amazon.com/"
             var uri = new Uri(url);
             var segments = uri.AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries);
 
-            // Look for the part that matches the title (likely the 3rd segment after "amazon.com")
             foreach (var segment in segments)
             {
                 if (!segment.StartsWith("dp") && !segment.StartsWith("gp"))
                 {
-                    return segment.Replace("-", " "); // Convert hyphens to spaces for readability
+                    return segment.Replace("-", " "); // hypens -> spaces
                 }
             }
 
@@ -33,21 +31,28 @@ public class UrlParser
     public void CreateCsvFile(string title)
     {
         string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        string targetDirectory = Path.Combine(homeDirectory, "webscrapr/Scraper/csv");
+        string targetDirectory = Path.Combine(homeDirectory, "webscrapr", "Scraper", "csv");
 
         try
         {
-            // Ensure the directory exists
+            if (string.IsNullOrWhiteSpace(title) || title == "Unknown Title" || title == "Invalid URL")
+            {
+                Console.WriteLine("Invalid or unknown title. Cannot create CSV file.");
+                return;
+            }
+
+            // sanitize title for file name
+            string sanitizedTitle = string.Concat(title.Split(Path.GetInvalidFileNameChars()));
+            string fileName = $"{sanitizedTitle.Replace(" ", "_")}.csv";
+            string filePath = Path.Combine(targetDirectory, fileName);
+
+            // ensure directory exists
             if (!Directory.Exists(targetDirectory))
             {
                 Directory.CreateDirectory(targetDirectory);
             }
 
-            // Combine the directory and file name
-            string fileName = $"{title.Replace(" ", "_")}.csv";
-            string filePath = Path.Combine(targetDirectory, fileName);
-
-            // Write a header row to the CSV file
+            // write header
             using var writer = new StreamWriter(filePath);
             writer.WriteLine("Date,Time,Price");
 
