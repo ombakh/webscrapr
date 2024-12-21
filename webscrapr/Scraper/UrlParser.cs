@@ -39,7 +39,7 @@ public class UrlParser
             }
 
             string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string targetDirectory = Path.Combine(homeDirectory, "RiderProjects", "webscrapr", "webscrapr", "Scraper", "csv"); // will make universal later, for my rier project right now
+            string targetDirectory = Path.Combine(homeDirectory, "RiderProjects", "webscrapr", "webscrapr", "Scraper", "csv"); // will make universal later, for my rider project right now
             Console.WriteLine($"Target directory: {targetDirectory}");
 
             string sanitizedTitle = string.Concat(title.Split(Path.GetInvalidFileNameChars()));
@@ -69,4 +69,6 @@ public class UrlParser
             Console.WriteLine($"Error creating CSV file: {ex}");
         }
     }
+
+    
 }
