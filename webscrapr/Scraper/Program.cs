@@ -29,7 +29,15 @@ class Program
         urlParser.CreateCsvFile(title);
 
         string price = await GetPriceFromAmazonAsync(url);
-        float priceFloat = float.Parse(price);
+        
+        try
+        {
+            float priceFloat = float.Parse(price);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Unable to parse price.");
+        }
         // Console.WriteLine($"Price float: {priceFloat}");
 
         if (!string.IsNullOrEmpty(price))
