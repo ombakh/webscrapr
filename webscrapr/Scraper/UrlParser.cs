@@ -39,8 +39,15 @@ public class UrlParser
             }
 
             string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string targetDirectory = Path.Combine(homeDirectory, "RiderProjects", "webscrapr", "webscrapr", "Scraper", "csv"); // will make universal later, for my rider project right now
+            string targetDirectory = Path.Combine(homeDirectory, "RiderProjects", "webscrapr", "webscrapr", "Scraper", "csv");
+        
             Console.WriteLine($"Target directory: {targetDirectory}");
+
+            if (!Directory.Exists(targetDirectory))
+            {
+                Directory.CreateDirectory(targetDirectory);
+                Console.WriteLine("Target directory created.");
+            }
 
             string sanitizedTitle = string.Concat(title.Split(Path.GetInvalidFileNameChars()));
             if (string.IsNullOrWhiteSpace(sanitizedTitle))
@@ -52,29 +59,21 @@ public class UrlParser
             string fileName = $"{sanitizedTitle.Replace(" ", "_")}.csv";
             string filePath = Path.Combine(targetDirectory, fileName);
             Console.WriteLine($"File path: {filePath}");
-
-            if (!Directory.Exists(targetDirectory))
+            
+            if (!File.Exists(filePath))
             {
-                Directory.CreateDirectory(targetDirectory);
-                Console.WriteLine("Target directory created.");
+                using var writer = new StreamWriter(filePath, append: false);
+                writer.WriteLine("Date,Time,Price");
                 Console.WriteLine($"CSV file '{fileName}' created successfully at {filePath}.");
             }
-
-            using var writer = new StreamWriter(filePath);
-            writer.WriteLine("Date,Time,Price");
-            
-            
+            else
+            {
+                Console.WriteLine($"CSV file '{fileName}' already exists. Skipping creation.");
+            }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error creating CSV file: {ex}");
         }
     }
-
-    public void WriteData(string title, string data)
-    {
-        
-    }
-
-    
 }
