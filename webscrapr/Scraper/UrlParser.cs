@@ -58,15 +58,10 @@ public class UrlParser
                 Directory.CreateDirectory(targetDirectory);
                 Console.WriteLine("Target directory created.");
                 Console.WriteLine($"CSV file '{fileName}' created successfully at {filePath}.");
-                using var writer = new StreamWriter(filePath);
-                writer.WriteLine("Date,Time,Price");
             }
-            else
-            {
-                Console.WriteLine("Target directory already exists; appending file.");
-            }
-            
-            
+
+            using var writer = new StreamWriter(filePath);
+            writer.WriteLine("Date,Time,Price");
             
             
         }
@@ -74,6 +69,11 @@ public class UrlParser
         {
             Console.WriteLine($"Error creating CSV file: {ex}");
         }
+    }
+
+    public void WriteData(string title, string data)
+    {
+        
     }
 
     
