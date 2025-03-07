@@ -89,7 +89,7 @@ class Program
         }
     }
 
-    private static async Task<string> GetTextFromLocatorAsync(ILocator locator)
+    private static async Task<string> GetTextFromLocatorAsync(ILocator locator) // for cleaning up returned price (had a new line in it)
     {
         if (await locator.CountAsync() > 0)
         {

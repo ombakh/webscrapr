@@ -60,7 +60,7 @@ public class UrlParser
             string filePath = Path.Combine(targetDirectory, fileName);
             Console.WriteLine($"File path: {filePath}");
             
-            if (!File.Exists(filePath))
+            if (File.Exists(filePath) == false)
             {
                 using var writer = new StreamWriter(filePath, append: false);
                 writer.WriteLine("Date,Time,Price");
@@ -69,6 +69,8 @@ public class UrlParser
             else
             {
                 Console.WriteLine($"CSV file '{fileName}' already exists. Skipping creation.");
+                using var writer = new StreamWriter(filePath, append: true);
+                writer.WriteLine("Date,Time,Price");
             }
         }
         catch (Exception ex)
