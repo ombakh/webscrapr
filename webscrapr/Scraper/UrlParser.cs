@@ -69,7 +69,7 @@ public class UrlParser
             else
             {
                 Console.WriteLine($"CSV file '{fileName}' already exists. Skipping creation.");
-                using var writer = new StreamWriter(filePath, append: true);
+                using var writer = new StreamWriter(filePath, append: false);
                 writer.WriteLine("Date,Time,Price");
             }
         }
