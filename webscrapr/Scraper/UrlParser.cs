@@ -11,7 +11,6 @@ public class UrlParser
         {
             var uri = new Uri(url);
             var segments = uri.AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries);
-
             foreach (var segment in segments)
             {
                 if (!segment.StartsWith("dp") && !segment.StartsWith("gp"))
